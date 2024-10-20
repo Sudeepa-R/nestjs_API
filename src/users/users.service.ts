@@ -39,8 +39,10 @@ export class UsersService {
     return this.users;
   }
   findOne(id:number){
+    
     const user=this.users.filter(i=>i.id==id);
     return user
+    
   }
   create(user:{name:string, email:string, role:'INTERN' | 'ADMIN' | 'ENGINEER'}){
     const userByHighestId=[...this.users].sort((a,b)=>b.id - a.id)
@@ -55,6 +57,13 @@ export class UsersService {
         if(user.id==id){
             return {...user,...updatedUser}
         }
+        return user
     })
+    return this.findOne(id)
+  }
+  delete(id:number){
+    const removedUser=this.findOne(id)
+    this.users=this.users.filter(i=>i.id!==id)
+    return removedUser;
   }
 }
