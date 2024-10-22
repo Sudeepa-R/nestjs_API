@@ -42,12 +42,10 @@ export class UsersService {
     return this.users;
   }
   findOne(id:number){
-    
     const user=this.users.filter(i=>i.id==id);
     if(!user) throw new NotFoundException('user NOt found')
     return user
-    
-  }
+  } 
   create(createUserDto:CreateUserDto){
     const userByHighestId=[...this.users].sort((a,b)=>b.id - a.id)
     const newUser={
